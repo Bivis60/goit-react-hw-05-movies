@@ -1,26 +1,24 @@
-import { NavLink, Route, Routes } from 'react-router-dom';
-import Home from './Home/Home';
-import Movies from './Movies/Movies';
-import MoviesDetails from './MoviesDetails/MoviesDetails';
-import Cast from './Cast/Cast';
-import Reviews from './Reviews/Reviews';
+import { Route, Routes } from 'react-router-dom';
+import Home from '../Pages/Home';
+import Movies from '../Pages/Movies';
+import MoviesDetails from '../Pages/MoviesDetails';
+import { Layout } from './Layout';
+import { Reviews } from './Reviews';
+import { Cast } from './Cast';
 
 export const App = () => {
   return (
-    <div>
-      <nav>
-        <NavLink to="/">home</NavLink>
-        <NavLink to="/movies">movies</NavLink>
-      </nav>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:movieId" element={<MoviesDetails />} />
-        <Route path="/movies/:movieId/cast" element={<Cast />} />
-        <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="movies" element={<Movies />} />
+        <Route path="movies/:movieId" element={<MoviesDetails />}>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
+        </Route>
         <Route path="*" element={<Home />} />
-      </Routes>
-    </div>
+      </Route>
+    </Routes>
   );
 };
 // https://api.themoviedb.org/3/movie/550?api_key=703a530d44c5942c47c279e3d1ee1c84
