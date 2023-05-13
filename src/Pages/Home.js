@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 
 const Home = () => {
   useEffect(() => {
-    const Respons = () => {
-      return fetch(
+   async function Respons() {
+      return await fetch(
         `https://api.themoviedb.org/3/trending/movie/day?api_key=703a530d44c5942c47c279e3d1ee1c84`
       ).then(res => res.json())
       .then((value) => {
