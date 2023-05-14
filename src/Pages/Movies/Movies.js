@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Button, Form, Input, List } from './Movies.stuled';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -48,19 +49,19 @@ const Movies = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="query" />
-        <button type="submit">Search</button>
-      </form>
+      <Form onSubmit={handleSubmit}>
+        <Input type="text" name="query" placeholder="find your movie" />
+        <Button type="submit">Search</Button>
+      </Form>
 
       <ul>
         {movies.map(movie => {
           return (
-            <li key={movie.id}>
+            <List key={movie.id}>
               <Link to={`/movies/${movie.id}`} state={{ from: location }}>
                 {movie.title}
               </Link>
-            </li>
+            </List>
           );
         })}
       </ul>

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { CardBox, CardList, CardTitle } from './Cats.styled';
 
 export const Cast = () => {
   const { movieId } = useParams();
@@ -21,10 +22,10 @@ export const Cast = () => {
   }, [movieId]);
 
   return (
-    <div>
-      <h3>Cast:</h3>
+    <CardBox>
+      <CardTitle>Cast:</CardTitle>
       {cast.length ? (
-        <ul>
+        <CardList>
           {cast.map(el => (
             <li key={el.id}>
               {el.profile_path ? (
@@ -44,10 +45,10 @@ export const Cast = () => {
               </div>
             </li>
           ))}
-        </ul>
+        </CardList>
       ) : (
         <p>There is no information about the actors for this film</p>
       )}
-    </div>
+    </CardBox>
   );
 };

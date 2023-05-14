@@ -3,6 +3,7 @@ import { getTrendingMovies } from 'GetToMoviesInfo';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
+import { Title, List } from './Home.stuled';
 
 const Home = () => {
   const [moviesList, setMoviesList] = useState([]);
@@ -26,14 +27,14 @@ const Home = () => {
     <>
       {error && toast.error('Please enter a value !')}
       <section>
-        <h1>The most popular movies today!</h1>
+        <Title>The most popular movies today!</Title>
 
         <ul>
           {moviesList.map(movie => {
             return (
-              <li key={movie.id}>
+              <List key={movie.id}>
                 <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-              </li>
+              </List>
             );
           })}
         </ul>

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { getMovie } from 'GetToMoviesInfo';
 import { toast } from 'react-toastify';
 import { Loader } from 'components/Loader/Loader';
+import { Box, ButtonLink, GenresTitle, Image, Info, List, Overview, Section, Title, UserScore } from './MoviesDetails.stuled';
 
 const MoviesDetails = () => {
   const [movieInfo, setMovieInfo] = useState({});
@@ -14,8 +15,8 @@ const MoviesDetails = () => {
     movieInfo;
 
   const posterSrc = poster_path
-    ? `https://image.tmdb.org/t/p/w400/${poster_path}`
-    : 'https://via.placeholder.com/400x600.png?text=Poster+Not+Available';
+    ? `https://image.tmdb.org/t/p/w300/${poster_path}`
+    : 'https://via.placeholder.com/300x450.png?text=Poster+Not+Available';
 
   useEffect(() => {
     const movieCard = async () => {
@@ -31,30 +32,33 @@ const MoviesDetails = () => {
 
   return (
     <>
-      <Link to={backLinkLocationRef.current}>Go to back</Link>
-      <div>
-        <img src={posterSrc} alt={`${title}`} />
-        <h2>
-          {title} ({release_date})
-        </h2>
-        <p>User Score: {(vote_average * 10).toFixed(0)}%</p>
-        <h3>Overview</h3>
-        {overview ? <p>{overview}</p> : <p>No information</p>}
+      <ButtonLink to={backLinkLocationRef.current}>Go to back</ButtonLink>
 
-        {genres && genres.length > 0 && (
-          <div>
-            <h4>Genres</h4>
-            <p>{genres.map(genre => genre.name).join(', ')}</p>
-          </div>
-        )}
-      </div>
+      <Section>
+        <Image src={posterSrc} alt={`${title}`} />
+        <Box>
+          <Title>
+            {title} ({release_date})
+          </Title>
+          <UserScore>User Score: {(vote_average * 10).toFixed(0)}%</UserScore>
+          <Overview>Overview</Overview>
+          {overview ? <Info>{overview}</Info> : <Info>No information</Info>}
+
+          {genres && genres.length > 0 && (
+            <div>
+              <GenresTitle>Genres</GenresTitle>
+              <p>{genres.map(genre => genre.name).join(', ')}</p>
+            </div>
+          )}
+        </Box>
+      </Section>
       <ul>
-        <li>
+        <List>
           <Link to="cast">Cast</Link>
-        </li>
-        <li>
+        </List>
+        <List>
           <Link to="reviews">Reviews</Link>
-        </li>
+        </List>
       </ul>
       <Suspense fallback={<Loader />}>
         <Outlet />
